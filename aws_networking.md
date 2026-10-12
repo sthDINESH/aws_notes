@@ -182,3 +182,22 @@
 > - You can use the same security group as the rule's destination to allow all resources associated with that security group to communicate with one another.
 >   - **Example:** Attach the same security group to related resources and allow that security group as the destination for internal traffic. The resources can communicate with one another, while separate rules selectively allow approved traffic from the public internet.
 
+
+## Guide to debug network issues:
+
+- To access another instance/resource in AWS, several conditions must be fulfilled.
+- Especially the following:
+
+    - Route to Host:
+        - We must be able to connect to another instance:
+            - We must be in the same VPC
+            - The VPC/route table/.. must be configured properly
+            - Network ACL must allow this connection
+    - Security group(most common issue)
+        - The security group(s) on the outgoing side must allow the connection
+        - The security group(s) on the receiving side must allow the connection
+    - For internet access:
+        - Public IP + Subnets needs to have an Internet Gateway + Internet Gateway is in the Route Table
+        - (or we would have to configure a NAT Gateway (not explored further in the course))
+    - Permissions(IAM):
+        - When accessing an AWS service, we must be allowed to access it(from a permission perspective)
