@@ -325,12 +325,10 @@ phases:
         commands:
             - echo "Build started on $(date)"
             - docker build --platform "$DOCKER_PLATFORM" -t "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG" .
-
-    post_build:
-        commands:
             - echo "Pushing the image to Amazon ECR..."
             - docker push "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
             - echo "Image pushed: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
+            
 
 artifacts:
     files:
